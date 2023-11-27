@@ -3,6 +3,7 @@
 
 
 import org.springframework.beans.factory.annotation.Value;
+
 ...
 @Value("${spring.application.name}")
 String name;
