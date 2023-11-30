@@ -132,7 +132,7 @@
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
 						<artifactId>checkstyle</artifactId>
-						<version>10.12.4</version>
+						<version>10.12.5</version>
 					</dependency>
 				</dependencies>
 
@@ -153,23 +153,23 @@
 				</executions>
 			</plugin>
 
-			 <plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-pmd-plugin</artifactId>
-					<version>3.21.2</version> <!-- or use version from pluginManagement -->
-					<configuration>
-							<!-- failOnViolation is actually true by default, but can be disabled -->
-							<failOnViolation>true</failOnViolation>
-							<!-- printFailingErrors is pretty useful -->
-							<printFailingErrors>true</printFailingErrors>
-					</configuration>
-					<executions>
-						<execution>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.21.2</version> <!-- or use version from pluginManagement -->
+				<configuration>
+						<!-- failOnViolation is actually true by default, but can be disabled -->
+						<failOnViolation>true</failOnViolation>
+						<!-- printFailingErrors is pretty useful -->
+						<printFailingErrors>true</printFailingErrors>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -179,7 +179,6 @@
                     <target>17</target>
                 </configuration>
             </plugin>
-
 			<plugin>
 				<groupId>com.diffplug.spotless</groupId>
 				<artifactId>spotless-maven-plugin</artifactId>
