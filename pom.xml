@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.0</version>
+		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.thb</groupId>
@@ -43,7 +43,7 @@
 			<plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
 	        <artifactId>maven-surefire-plugin</artifactId>
-	        <version>3.2.2</version>
+	        <version>3.5.1</version>
 	        <configuration>
 	             <includes>
 	                 <include>**/*Tests.*</include>
@@ -54,7 +54,7 @@
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-failsafe-plugin</artifactId>
-			    <version>3.2.2</version>
+			    <version>3.5.1</version>
 			    <configuration>
 			        <includes><include>**/*IT.*</include></includes>
 			    </configuration>
@@ -71,7 +71,7 @@
 			<plugin>
 			  <groupId>org.jacoco</groupId>
 			  <artifactId>jacoco-maven-plugin</artifactId>
-			  <version>0.8.11</version>
+			  <version>0.8.12</version>
 				<executions>
 						<execution>
 							<id>default-prepare-agent</id>
@@ -127,7 +127,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.3.1</version>
+				<version>3.4.0</version>
 				<dependencies>
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
@@ -156,7 +156,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.21.2</version> <!-- or use version from pluginManagement -->
+				<version>3.23.0</version> <!-- or use version from pluginManagement -->
 				<configuration>
 						<!-- failOnViolation is actually true by default, but can be disabled -->
 						<failOnViolation>true</failOnViolation>
@@ -182,7 +182,7 @@
 			<plugin>
 				<groupId>com.diffplug.spotless</groupId>
 				<artifactId>spotless-maven-plugin</artifactId>
-				<version>2.41.0</version>
+				<version>2.43.0</version>
 				<configuration>
 					<!-- optional: limit format enforcement to just the files changed by this feature branch -->
 					<ratchetFrom>origin/main</ratchetFrom>
