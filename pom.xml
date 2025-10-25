@@ -263,7 +263,6 @@
 				<version>${jib-maven-plugin.version}</version>
 				<configuration>
 					<to>
-						<image>demo</image>
 						<image>docker.io/larsgentschthb/demo-spring-maven</image>
 					</to>
 				</configuration>
