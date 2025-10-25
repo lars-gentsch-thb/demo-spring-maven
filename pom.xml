@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.3</version>
+		<version>3.5.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.thb</groupId>
@@ -18,6 +18,17 @@
 		<java.version>17</java.version>
   		<sonar.organization>lars-gentsch-thb</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+		<!-- Plugin Versions -->
+		<maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
+		<jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
+		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+		<checkstyle.version>12.1.0</checkstyle.version>
+		<maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
+		<maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
+		<spotless-maven-plugin.version>3.0.0</spotless-maven-plugin.version>
+		<jib-maven-plugin.version>3.4.6</jib-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -43,7 +54,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.5.2</version>
+				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					 <includes>
 						 <include>**/*Tests.*</include>
@@ -54,7 +65,7 @@
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-failsafe-plugin</artifactId>
-			    <version>3.5.2</version>
+			    <version>${maven-failsafe-plugin.version}</version>
 			    <configuration>
 			        <includes><include>**/*IT.*</include></includes>
 			    </configuration>
@@ -71,7 +82,7 @@
 			<plugin>
 			  <groupId>org.jacoco</groupId>
 			  <artifactId>jacoco-maven-plugin</artifactId>
-			  <version>0.8.12</version>
+			  <version>${jacoco-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>
@@ -127,12 +138,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.6.0</version>
+				<version>${maven-checkstyle-plugin.version}</version>
 				<dependencies>
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
 						<artifactId>checkstyle</artifactId>
-						<version>10.21.3</version>
+						<version>${checkstyle.version}</version>
 					</dependency>
 				</dependencies>
 
@@ -156,7 +167,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.26.0</version> <!-- or use version from pluginManagement -->
+				<version>${maven-pmd-plugin.version}</version> <!-- or use version from pluginManagement -->
 				<configuration>
 					<!-- failOnViolation is actually true by default, but can be disabled -->
 					<failOnViolation>true</failOnViolation>
@@ -171,72 +182,85 @@
 					</execution>
 				</executions>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                </configuration>
-            </plugin>
 			<plugin>
-				<groupId>com.diffplug.spotless</groupId>
-				<artifactId>spotless-maven-plugin</artifactId>
-				<version>2.44.3</version>
-				<configuration>
-					<!-- optional: limit format enforcement to just the files changed by this feature branch -->
-					<ratchetFrom>origin/main</ratchetFrom>
-					<formats>
-						<!-- you can define as many formats as you want, each is independent -->
-						<format>
-							<!-- define the files to apply to -->
-							<includes>
-								<include>.gitattributes</include>
-								<include>.gitignore</include>
-							</includes>
-							<!-- define the steps to apply to those files -->
-							<trimTrailingWhitespace/>
-							<endWithNewline/>
-							<indent>
-								<tabs>true</tabs>
-								<spacesPerTab>4</spacesPerTab>
-							</indent>
-						</format>
-					</formats>
-					<!-- define a language-specific format -->
-					<java>
-						<!-- no need to specify files, inferred automatically, but you can if you want -->
-
-						<!-- apply a specific flavor of google-java-format and reflow long strings -->
-						<googleJavaFormat>
-							<style>AOSP</style>
-							<reflowLongStrings>true</reflowLongStrings>
-							<groupArtifact>com.google.googlejavaformat:google-java-format</groupArtifact>
-						</googleJavaFormat>
-						<!-- make sure every file has the following copyright header.
-                          optionally, Spotless can set copyright years by digging
-                          through git history (see "license" section below) -->
-						<licenseHeader>
-							<content>/* (C)$YEAR */</content>  <!-- or <file>${project.basedir}/license-header</file> -->
-						</licenseHeader>
-					</java>
-				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven-jxr-plugin.version}</version>
 				<executions>
 					<execution>
-						<id>spotless</id>
-						<phase>validate</phase>
+						<phase>site</phase>
 						<goals>
-							<goal>check</goal>
+							<goal>jxr</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+			<plugin>
+			<groupId>com.diffplug.spotless</groupId>
+			<artifactId>spotless-maven-plugin</artifactId>
+			<version>${spotless-maven-plugin.version}</version>
+			<configuration>
+				<!-- optional: limit format enforcement to just the files changed by this feature branch -->
+				<ratchetFrom>origin/main</ratchetFrom>
+				<formats>
+					<!-- you can define as many formats as you want, each is independent -->
+					<format>
+						<!-- define the files to apply to -->
+						<includes>
+							<include>.gitattributes</include>
+							<include>.gitignore</include>
+						</includes>
+						<!-- define the steps to apply to those files -->
+						<trimTrailingWhitespace/>
+						<endWithNewline/>
+						<indent>
+							<tabs>true</tabs>
+							<spacesPerTab>4</spacesPerTab>
+						</indent>
+					</format>
+				</formats>
+				<!-- define a language-specific format -->
+				<java>
+					<!-- no need to specify files, inferred automatically, but you can if you want -->
+
+					<!-- apply a specific flavor of google-java-format and reflow long strings -->
+					<googleJavaFormat>
+						<style>AOSP</style>
+						<reflowLongStrings>true</reflowLongStrings>
+						<groupArtifact>com.google.googlejavaformat:google-java-format</groupArtifact>
+					</googleJavaFormat>
+					<!-- make sure every file has the following copyright header.
+					  optionally, Spotless can set copyright years by digging
+					  through git history (see "license" section below) -->
+					<licenseHeader>
+						<content>/* (C)$YEAR */</content>  <!-- or <file>${project.basedir}/license-header</file> -->
+					</licenseHeader>
+				</java>
+			</configuration>
+			<executions>
+				<execution>
+					<id>spotless</id>
+					<phase>validate</phase>
+					<goals>
+						<goal>check</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
 
             <!-- Container build plugin -->
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.4.4</version>
+				<version>${jib-maven-plugin.version}</version>
 				<configuration>
 					<to>
 						<image>demo</image>
@@ -247,5 +271,24 @@
 		</plugins>
 
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${maven-pmd-plugin.version}</version>
+				<configuration>
+					<linkXRef>true</linkXRef>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven-jxr-plugin.version}</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 </project>
