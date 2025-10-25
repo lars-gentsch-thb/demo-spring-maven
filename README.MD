@@ -2,6 +2,7 @@
 
 [Spotless integration](https://github.com/diffplug/spotless/tree/main/plugin-maven)
 
+# Spring Boot Application Properties
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -13,7 +14,21 @@ String name;
 Externalize SpringBoot properties
 -Dspring.config.location = C:\application.properties
 
-
 https://www.tutorialspoint.com/spring_boot/spring_boot_application_properties.htm
 
+# Maven Commands
 mvn clean verify spring-boot:run
+
+# Docker Build
+$ mvn compile jib:build
+
+# Docker Build Local
+$ mvn compile jib:dockerBuild
+
+# Docker Run
+$ docker run --platform linux/arm64 -p 8080:8080 larsgentschthb/demo-spring-maven:latest
+
+# Docker Run im Daemon Modus
+$ docker run --platform linux/arm64 -d -p 8080:8080 larsgentschthb/demo-spring-maven:latest
+
+
