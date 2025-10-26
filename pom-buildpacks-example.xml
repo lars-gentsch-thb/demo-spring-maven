@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Beispiel: Spring Boot Buildpacks Alternative zu Jib -->
+<project>
+    <!-- ...existing configuration... -->
+
+    <properties>
+        <!-- Image Name Konfiguration -->
+        <docker.image.name>docker.io/larsgentschthb/demo-spring-maven</docker.image.name>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven Plugin mit Buildpacks -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <!-- Image Name -->
+                        <name>${docker.image.name}:${project.version}</name>
+                        <name>${docker.image.name}:latest</name>
+
+                        <!-- Buildpacks Builder (Paketobuildpacks ist Standard) -->
+                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
+
+                        <!-- Environment Variables -->
+                        <env>
+                            <BP_JVM_VERSION>17</BP_JVM_VERSION>
+                        </env>
+
+                        <!-- Multi-Platform Support -->
+                        <buildpacks>
+                            <buildpack>gcr.io/paketo-buildpacks/java</buildpack>
+                        </buildpacks>
+
+                        <!-- Docker Registry Authentifizierung -->
+                        <publish>true</publish>
+                    </image>
+
+                    <!-- Docker Registry Login via Environment Variables -->
+                    <docker>
+                        <publishRegistry>
+                            <username>${env.DOCKER_HUB_USERNAME}</username>
+                            <password>${env.DOCKER_HUB_TOKEN}</password>
+                            <url>https://docker.io</url>
+                        </publishRegistry>
+                    </docker>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
