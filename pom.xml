@@ -24,7 +24,7 @@
 		<maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
 		<jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
 		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
-		<checkstyle.version>12.1.0</checkstyle.version>
+		<checkstyle.version>12.1.2</checkstyle.version>
 		<maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
 		<maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
 		<spotless-maven-plugin.version>3.0.0</spotless-maven-plugin.version>
