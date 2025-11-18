@@ -28,7 +28,7 @@
 		<maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
 		<maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
 		<spotless-maven-plugin.version>3.0.0</spotless-maven-plugin.version>
-		<jib-maven-plugin.version>3.4.6</jib-maven-plugin.version>
+		<jib-maven-plugin.version>3.5.0</jib-maven-plugin.version>
 	</properties>
 
 	<dependencies>
